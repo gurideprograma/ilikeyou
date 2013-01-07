@@ -6,13 +6,9 @@
  */
 
 /**
- * @name Arquivo def.php, onde definimos variáveis para auxiliar em outras partes do programa
+ * @name Arquivo pic.php, que exibe as fotos na capa do site
  * @package ilikeyou
  * @author @_gurideprograma
  * @license GPLv2
  * @link http://github.com/gurideprograma/ilikeyou
  */
-
-define('DIR','/ilikeyou');
-define('TITLE','i like you!');
-define('DIR_PICTURES','pic/');

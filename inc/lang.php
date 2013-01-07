@@ -6,13 +6,12 @@
  */
 
 /**
- * @name Arquivo def.php, onde definimos variáveis para auxiliar em outras partes do programa
+ * @name Arquivo lang.php, onde guardamos todas as palavras e frases do site, para possíveis traduções para outros idiomas
  * @package ilikeyou
  * @author @_gurideprograma
  * @license GPLv2
  * @link http://github.com/gurideprograma/ilikeyou
  */
 
-define('DIR','/ilikeyou');
-define('TITLE','i like you!');
-define('DIR_PICTURES','pic/');
+define('LOADING','Loading...');
+define('UPLOADEDBY','Uploaded by ');

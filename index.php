@@ -1,9 +1,34 @@
 <?
+/*
+ *  Sistema de avaliação de fotos
+ *  Copyright (C) 2012 @_gurideprograma
+ *                                                                    
+ *  Este programa e software livre; voce pode redistribui-lo e/ou     
+ *  modifica-lo sob os termos da Licenca Publica Geral GNU, conforme  
+ *  publicada pela Free Software Foundation; tanto a versao 2 da      
+ *  Licenca como (a seu criterio) qualquer versao mais nova.          
+ *                                                                    
+ *  Este programa e distribuido na expectativa de ser util, mas SEM   
+ *  QUALQUER GARANTIA; sem mesmo a garantia implicita de              
+ *  COMERCIALIZACAO ou de ADEQUACAO A QUALQUER PROPOSITO EM           
+ *  PARTICULAR. Consulte a Licenca Publica Geral GNU para obter mais  
+ *  detalhes.                                                         
+ *                                                                    
+ *  Voce deve ter recebido uma copia da Licenca Publica Geral GNU     
+ *  junto com este programa; se nao, escreva para a Free Software     
+ *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA          
+ *  02111-1307, USA.                                                  
+ *  
+ *  Copia da licenca no diretorio licenca/licenca_en.txt 
+ *                                licenca/licenca_pt-br.txt 
+ */
+ 
 include("inc/core.php");
 include("inc/def.php");
+include("inc/lang.php");
 ?><html>
 	<head>
-		<title>i like you!</title>
+		<title><?= TITLE ?></title>
 		
 		<script type="text/javascript" src="<?= DIR ?>/inc/jquery-1.5.1.js"></script>
 		<script type="text/javascript" src="<?= DIR ?>/inc/jqueryui/js/jquery-ui-1.8.10.custom.min.js"></script>
@@ -16,11 +41,10 @@ include("inc/def.php");
 		
 		<meta http-equiv="content-language" content="en">
 		<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
-		<meta name="description" content="" />
-		<meta name="keywords" content="">
-		<meta name="author" content="" />
-		<meta name="reply-to" content="">
-        	<meta name="google" content="notranslate" />
+		<meta name="description" content="<?= DESCRIPTION ?>" />
+		<meta name="keywords" content="<?= KEYWORDS ?>">
+		<meta name="author" content="github.com/gurideprograma/ilikeyou" />
+		<meta name="reply-to" content="gurideprograma@mail.com">
 
         </head>
         <body>
@@ -28,6 +52,15 @@ include("inc/def.php");
         	
         	<div id="cont">
         		
+        	</div>
+        	
+		<script type="text/javascript">
+			$('#cont').html('<?= LOADING ?>');
+			$('#cont').load('pic.php');
+		</script>
+        	
+        	<div id="copy">
+        		&copy; <?= date("Y") ?> - <?= TITLE ?>.
         	</div>
         </body>
 </html>
