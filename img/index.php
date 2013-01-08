@@ -6,19 +6,12 @@
  */
 
 /**
- * @name Arquivo def.php, onde definimos variáveis para auxiliar em outras partes do programa
+ * @name Arquivo pic.php, que exibe as fotos na capa do site
  * @package ilikeyou
  * @author @_gurideprograma
  * @license GPLv2
  * @link http://github.com/gurideprograma/ilikeyou
  */
-
-define('DIR','/ilikeyou');
-define('TITLE','i like you!');
-define('DIR_PICTURES','pic/');
-
-define('DB_LOCALHOST','localhost');
-define('DB_USER','root');
-define('DB_PASS','');
-define('DB_NAME','ilikeyou');
-
+include("../inc/def.php");
+?>
+Oops! Bye ;) <meta http-equiv="refresh" content="0;URL=<?= DIR ?>/">

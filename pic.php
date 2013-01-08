@@ -12,3 +12,12 @@
  * @license GPLv2
  * @link http://github.com/gurideprograma/ilikeyou
  */
+include("inc/def.php");
+include("inc/lang.php");
+include("inc/crislib.php");
+include("inc/core.php");
+$core = new core();
+$core->connect();
+$home = new homePic();
+$home->showPicture();
+$core->close();

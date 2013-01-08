@@ -23,9 +23,10 @@
  *                                licenca/licenca_pt-br.txt 
  */
  
-include("inc/core.php");
 include("inc/def.php");
 include("inc/lang.php");
+include("inc/crislib.php");
+include("inc/core.php");
 ?><html>
 	<head>
 		<title><?= TITLE ?></title>
@@ -60,7 +61,7 @@ include("inc/lang.php");
 		</script>
         	
         	<div id="copy">
-        		&copy; <?= date("Y") ?> - <?= TITLE ?>.
+        		&copy; <?= date("Y") ?> - <?= TITLE ?>
         	</div>
         </body>
 </html>

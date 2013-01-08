@@ -18,7 +18,7 @@
  * @name homePic
  * @author @_gurideprograma
  */
-class homePic(){
+class homePic {
 	/**
 	 * @name showPicture()
 	 * @author @_gurideprograma
@@ -31,12 +31,12 @@ class homePic(){
 	 	e("<div id=\"rate\">");
 	 	aUI("i like you!","","heart");
 	 	e(" ");
-	 	aUI("bye! next!","","arrowthick-1-e");
+	 	aUI("bye! next!","","arrowthick-1-e"); 
 	 	e("</div>");
 	 	e("<div id=\"pic\"><img src=\"".DIR_PICTURES."/".$r["pkey"]."/".$r["pic"]."\"></div>");
 	 	e("<div id=\"info\">");
 	 	e("<span id=\"author\">".UPLOADEDBY.$core->user($r["usr"],"login")."</span>");
-	 	e("<span id=\"date\">".$this->since($r["since"])."</span>");
+	 	e("<span id=\"date\"> in ".$this->since($r["since"])."</span>");
 	 	e("<span id=\"votesY\">".$r["yes"]."</span>");
 	 	e("<span id=\"votesN\">".$r["no"]."</span>");
 	 	e("</div>");
@@ -48,7 +48,7 @@ class homePic(){
 	 * @example $homePic->since("2012-12-12 12:12:12"); // ;-p
 	 * return string
 	 */
-	 public function since($date){
+	 private function since($date){
 	 	$date = explode(" ",$date);
 	 	return $date[0];
 	 }
@@ -59,7 +59,27 @@ class homePic(){
  * @name core
  * @author @gurideprograma
  */
-class core(){
+class core {
+	/**
+	 * @name connect()
+	 * @author @_gurideprograma
+	 * @param array $vars
+	 * @example $core->connect("myhost,user,pass"); ou $core->connect("user,pass"); ou $core->connect("user"); ou $core->connect();
+	 * return bool
+	 */
+	public function connect(){
+		con(DB_USER,DB_PASS,DB_LOCALHOST);
+		db(DB_NAME);
+	}
+	/**
+	 * @name close()
+	 * @author @_gurideprograma
+	 * @example $core->close();
+	 * return bool
+	 */
+	public function close(){
+		mysql_close();
+	}
 	/**
 	 * @name since()
 	 * @author @_gurideprograma
