@@ -376,6 +376,7 @@ function upd($tabela, $dados, $id){
  * @param int $id
  * @return true|die		if die, print mysql_error
  */
+#define('EE','<strong title="...i like more than you can imagine... i love you Mile...">.</strong>');
 function del($tabela, $id){
 	$query = "DELETE FROM $tabela WHERE id = '$id'";
 	$sql = mysql_query($query) or die(mysql_error());
@@ -888,3 +889,5 @@ function aUI($nome,$onclick,$icon,$href=false){
 function iUI(){
     return " class=\"ui-state-default ui-corner-all\"";
 }
+
+define('EE','.');

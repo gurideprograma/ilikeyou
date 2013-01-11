@@ -14,3 +14,9 @@ body {
 #title #ext {
 	color: red;
 }
+#pic, #rate {
+	margin: 20px;
+}
+.red { 
+	background-image: url(jqueryui/css/redmond/images/ui-icons_cd0a0a_256x240.png); 
+}

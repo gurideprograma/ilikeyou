@@ -15,3 +15,15 @@
 
 define('LOADING','Loading...');
 define('UPLOADEDBY','Uploaded by ');
+
+define('RATE_SUCESS_LOGOUT','Rated! ;) Gostaria de se cadastrar e guardar suas avaliações?');
+define('RATE_SUCESS_NORMAL','Rated! ;)');
+define('RATE_SUCESS_LOGIN','Rated! ;) <a href="'.DIR.'/?myreviews">View my reviews</a> | <a href="'.DIR.'/?myreviews">Next picture</a> &raquo;');
+
+define('MENU_HOME','Home');
+define('MENU_MYPAGE','My page');
+define('MENU_LOGIN','Login');
+define('MENU_LOGOUT','Logout');
+define('MENU_SIGUP','Sig up!');
+define('MENU_TERMSUSE','Terms of use');
+define('MENU_PRIVACY','Privacy');

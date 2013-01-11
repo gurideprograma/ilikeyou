@@ -27,6 +27,7 @@ include("inc/def.php");
 include("inc/lang.php");
 include("inc/crislib.php");
 include("inc/core.php");
+$core = new core();
 ?><html>
 	<head>
 		<title><?= TITLE ?></title>
@@ -34,6 +35,7 @@ include("inc/core.php");
 		<script type="text/javascript" src="<?= DIR ?>/inc/jquery-1.5.1.js"></script>
 		<script type="text/javascript" src="<?= DIR ?>/inc/jqueryui/js/jquery-ui-1.8.10.custom.min.js"></script>
 		<script type="text/javascript" src="<?= DIR ?>/inc/jqueryui.js"></script>
+		<script type="text/javascript" src="<?= DIR ?>/inc/js.js"></script>
 		
 		<link type="text/css" href="<?= DIR ?>/inc/jqueryui.css" rel="stylesheet" />
 		<link type="text/css" href="<?= DIR ?>/inc/css.css" rel="stylesheet" />
@@ -49,7 +51,7 @@ include("inc/core.php");
 
         </head>
         <body>
-        	<div id="title">i-<span>like</span>you<span id="ext">.net</div></div>
+        	<div id="title">i-<span>like</span>you<span id="ext"><?= EE ?>net</div></div>
         	
         	<div id="cont">
         		
@@ -61,6 +63,10 @@ include("inc/core.php");
 		</script>
         	
         	<div id="copy">
+        		<a href="<?= DIR ?>/"><?= MENU_HOME ?></a>
+        		<? $core->menuLogin(); ?>
+        		<a href="<?= DIR ?>/?privacy"><?= MENU_PRIVACY ?></a>
+        		<a href="<?= DIR ?>/?use"><?= MENU_TERMSUSE ?></a><br>
         		&copy; <?= date("Y") ?> - <?= TITLE ?>
         	</div>
         </body>

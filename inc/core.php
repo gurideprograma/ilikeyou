@@ -29,10 +29,11 @@ class homePic {
 	 	$sel = sel("pictures","status > 0","RAND()",1);
 	 	$r = fetch($sel);
 	 	e("<div id=\"rate\">");
-	 	aUI("i like you!","","heart");
+	 	aUI("i like you!","ilikeyou('".$r["pkey"]."','".LOADING."')","heart");
 	 	e(" ");
 	 	aUI("bye! next!","","arrowthick-1-e"); 
 	 	e("</div>");
+	 	e("<div id=\"ratemsg\" style=\"display: none\"></div>");
 	 	e("<div id=\"pic\"><img src=\"".DIR_PICTURES."/".$r["pkey"]."/".$r["pic"]."\"></div>");
 	 	e("<div id=\"info\">");
 	 	e("<span id=\"author\">".UPLOADEDBY.$core->user($r["usr"],"login")."</span>");
@@ -55,16 +56,34 @@ class homePic {
 }
 
 /**
+ * Trata as avaliações
+ * @name rate
+ * @author @_gurideprograma
+ */
+class rate {
+	/**
+	 * @name rating()
+	 * @author @_gurideprograma
+	 * @param string $pkey
+	 * @example $rate->rating($pkey);
+	 * @return bool
+	 */
+	public function rating($pkey){
+		info(RATE_SUCESS_LOGIN);
+	}
+}
+
+/**
  * Trata funções específicas do sistema ou requisições do banco
  * @name core
- * @author @gurideprograma
+ * @author @_gurideprograma
  */
 class core {
 	/**
 	 * @name connect()
 	 * @author @_gurideprograma
 	 * @param array $vars
-	 * @example $core->connect("myhost,user,pass"); ou $core->connect("user,pass"); ou $core->connect("user"); ou $core->connect();
+	 * @example $core->connect();
 	 * return bool
 	 */
 	public function connect(){
@@ -91,5 +110,34 @@ class core {
 		$sel = sel("usr","ukey = '$chave'");
 		$r = fetch($sel);
 		return $r[$campo];
+	}
+	/**
+	 * Se o usuário está logado, exibe o link Meu painel, se não, exibe os links Cadastrar e Entrar
+	 * @name menuLogin()
+	 * @author @_gurideprograma
+	 * @example $core->menuLogin();
+	 * return string
+	 */
+	public function menuLogin(){
+		
+	}
+}
+
+/**
+ * Relacionado a opções de privacidade dos usuários e imagens
+ * @name privacy
+ * @author @_gurideprograma
+ */
+class privacy {
+	/**
+	 * O usuário pode optar se quer que haja um link em seu login, abaixo de suas imagens, para que outros usuários possam ver outras imagens dele, ou não.
+	 * @name linkUser()
+	 * @author @_gurideprograma
+	 * @param int $ukey
+	 * @example $privacy->linkUser();
+	 * return bool
+	 */
+	public function linkUser($ukey){
+		
 	}
 }
