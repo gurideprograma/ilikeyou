@@ -24,10 +24,10 @@ create table pictures (
 create table usr (
 	id int(11) auto_increment,
 	ukey varchar(128),
+	twitterid varchar(100),
 	name varchar(20),
 	email varchar(50),
 	login varchar(20),
-	pass varchar(128),
 	since datetime,
 	status int(1),
 	primary key(id)
@@ -58,4 +58,12 @@ create table stats (
 	primary key(id)
 );
 
-
+create table sessoes (
+	id int(11) auto_increment,
+	skey varchar(128),
+	idu int(11),
+	ip varchar(50), 
+	data datetime,
+	status int(1),
+	primary key(id)
+);

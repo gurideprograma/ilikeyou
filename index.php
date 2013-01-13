@@ -1,4 +1,5 @@
 <?
+session_start();
 /*
  *  Sistema de avaliação de fotos
  *  Copyright (C) 2012 @_gurideprograma
@@ -27,7 +28,15 @@ include("inc/def.php");
 include("inc/lang.php");
 include("inc/crislib.php");
 include("inc/core.php");
+$path = url($_SERVER['REQUEST_URI'],str_replace("/","",DIR)."/");
 $core = new core();
+$auth = new auth();
+$auth->con();
+if($path == "pages/logout.php"){
+	session_destroy();
+	session_start();
+}
+include_once("inc/twitteroauth.php");
 ?><html>
 	<head>
 		<title><?= TITLE ?></title>
@@ -50,23 +59,27 @@ $core = new core();
 		<meta name="reply-to" content="gurideprograma@mail.com">
 
         </head>
-        <body>
+        <body onload="loadPicture()">
         	<div id="title">i-<span>like</span>you<span id="ext"><?= EE ?>net</div></div>
-        	
-        	<div id="cont">
-        		
+        	<div id="welcome">
+        		<?
+        		if($auth->isOn() == true){
+        			info(MSG_WELCOME." <a href=\"http://twitter.com/".$_SESSION['request_vars']['screen_name']."\" target=\"_blank\">".$_SESSION['request_vars']['screen_name']."</a>! <a href=\"?logout\">".MENU_LOGOUT."</a>?",300);
+        		}else{
+        			$auth->twitterButton();
+        		}
+        		?>
         	</div>
-        	
-		<script type="text/javascript">
-			$('#cont').html('<?= LOADING ?>');
-			$('#cont').load('pic.php');
-		</script>
+        	<div style="clear:both"></div>
+        	<? if($path == "pages/home.php"){ ?><div id="cont"></div><? } ?>
+        	<div id="conteudo"><? include($path) ?></div>
         	
         	<div id="copy">
         		<a href="<?= DIR ?>/"><?= MENU_HOME ?></a>
         		<? $core->menuLogin(); ?>
         		<a href="<?= DIR ?>/?privacy"><?= MENU_PRIVACY ?></a>
-        		<a href="<?= DIR ?>/?use"><?= MENU_TERMSUSE ?></a><br>
+        		<? /*<a href="<?= DIR ?>/?use"><?= MENU_TERMSUSE ?></a> */ ?>
+        		<? $core->menuLogout(); ?><br>
         		&copy; <?= date("Y") ?> - <?= TITLE ?>
         	</div>
         </body>

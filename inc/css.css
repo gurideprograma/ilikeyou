@@ -3,16 +3,26 @@ body {
 	font-size: 12px;
 	color: #000;
 }
+a {
+	text-decoration: none;
+	font-weight: bold;
+}
 #title {
 	font-size: 40px;
 	font-weight: bold;
 	cursor: default;
+	float: left;
+	width: 45%;
 }
 #title span {
 	color: green;
 }
 #title #ext {
 	color: red;
+}
+#welcome {
+	float: right;
+	width: 30%;
 }
 #pic, #rate {
 	margin: 20px;

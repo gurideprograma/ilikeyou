@@ -16,9 +16,15 @@
 define('DIR','/ilikeyou');
 define('TITLE','i like you!');
 define('DIR_PICTURES','pic/');
+define('LANG','en');
+define('DOMAIN','localhost');
 
 define('DB_LOCALHOST','localhost');
 define('DB_USER','root');
 define('DB_PASS','');
 define('DB_NAME','ilikeyou');
 
+# autenticação com Twitter
+define('CONSUMER_KEY', '0EiIplmjQeOekmQmENyu7Q');
+define('CONSUMER_SECRET', 'VJ4UNSZptixgaDMoHzYXfsfCZ7v3ftCeJJxWRFLx3s');
+define('OAUTH_CALLBACK', 'http://'.DOMAIN.DIR.'/?login');

@@ -13,17 +13,33 @@
  * @link http://github.com/gurideprograma/ilikeyou
  */
 
+# Textos
+define('ERROR404','Oops! Not found this page... sorry...');
 define('LOADING','Loading...');
 define('UPLOADEDBY','Uploaded by ');
-
-define('RATE_SUCESS_LOGOUT','Rated! ;) Gostaria de se cadastrar e guardar suas avaliações?');
+define('RATE_SUCESS_LOGOUT','Rated! ;) You can signup');
 define('RATE_SUCESS_NORMAL','Rated! ;)');
-define('RATE_SUCESS_LOGIN','Rated! ;) <a href="'.DIR.'/?myreviews">View my reviews</a> | <a href="'.DIR.'/?myreviews">Next picture</a> &raquo;');
+define('RATE_SUCESS_LOGIN','Rated! ;) <a href="'.DIR.'/?me">View my reviews</a> | <a href="#" onclick="loadPicture()">Next picture</a> &raquo;');
+define('MSG_ISON','You are logged now! Loading your page...');
+define('MSG_LOGOUT','For return, click on button: ');
+define('MSG_WELCOME','Welcome');
+define('TXT_SIGNUP','');
+define('TXT_PRIVACY','<p>Is simple: we not get your info. We get just with login and twitter_id of your twitter, for you do can save your pictures in this site. Nothing more info! View we code in <a href="http://github.com/gurideprograma/ilikeyou" target="_blank">github.com/gurideprograma/ilikeyou</a> ;) We use GPL (licence).</p>');
+define('TXT_ME_1','<h3>Upload new picture</h3>');
+define('TXT_ME_2','<h3>My pictures</h3>');
+define('ERROR_NOUPLOADPICTURES','Nothing pictures here... ');
 
+# menu
 define('MENU_HOME','Home');
 define('MENU_MYPAGE','My page');
 define('MENU_LOGIN','Login');
 define('MENU_LOGOUT','Logout');
-define('MENU_SIGUP','Sig up!');
+define('MENU_SIGNUP','Enter!');
 define('MENU_TERMSUSE','Terms of use');
 define('MENU_PRIVACY','Privacy');
+
+# títulos
+define('TITLE_SIGNUP','Sign Up!');
+define('TITLE_ME','My page');
+define('TITLE_PRIVACY','Privacy');
+define('TITLE_LOGOUT','Bye :)');
