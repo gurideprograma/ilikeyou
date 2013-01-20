@@ -1,4 +1,7 @@
-<?php
+<div class="container">
+    <div class="page-header">
+        <h1><?= TITLE_LOGIN ?></h1>
+    </div><?php
 #session_start();
 #include_once("inc/def.php");
 #include("inc/core.php");
@@ -8,7 +11,8 @@ if (isset($_REQUEST['oauth_token']) && $_SESSION['token']  !== $_REQUEST['oauth_
 
     // if token is old, distroy any session and redirect user to index.php
     session_destroy();
-    header('Location: ./');
+    #header('Location: ./');
+    echo "<meta http-equiv=\"refresh\" content=\"0;URL=".DIR."/\">";
 
 }elseif(isset($_REQUEST['oauth_token']) && $_SESSION['token'] == $_REQUEST['oauth_token']) {
 
@@ -22,26 +26,20 @@ if (isset($_REQUEST['oauth_token']) && $_SESSION['token']  !== $_REQUEST['oauth_
         $_SESSION['status'] = 'verified';
         $_SESSION['request_vars'] = $access_token;
         
-        
-        
         /*
-         * 
          * I-LIKEYOU.NET
-         * 
          */
         $auth = new auth();
         $auth->doSignup();
 	/*
-         * 
          * I-LIKEYOU.NET
-         * 
          */
-         
-         
+        
         // unset no longer needed request tokens
         unset($_SESSION['token']);
         unset($_SESSION['token_secret']);
-        header('Location: ./');
+        #header('Location: ./');
+        echo "<meta http-equiv=\"refresh\" content=\"0;URL=".DIR."/\">";
     }else{
         die("error, try again later!");
     }
@@ -50,7 +48,8 @@ if (isset($_REQUEST['oauth_token']) && $_SESSION['token']  !== $_REQUEST['oauth_
 
     if(isset($_GET["denied"]))
     {
-        header('Location: ./');
+        #header('Location: ./');
+        echo "<meta http-equiv=\"refresh\" content=\"0;URL=".DIR."/\">";
         die();
     }
 
@@ -67,7 +66,8 @@ if (isset($_REQUEST['oauth_token']) && $_SESSION['token']  !== $_REQUEST['oauth_
     {
         //redirect user to twitter
         $twitter_url = $connection->getAuthorizeURL($request_token['oauth_token']);
-        header('Location: ' . $twitter_url);
+        #header('Location: ' . $twitter_url);
+        echo "<meta http-equiv=\"refresh\" content=\"0;URL=$twitter_url\">";
     }else{
         die("error connecting to twitter! try again later!");
     }

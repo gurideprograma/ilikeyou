@@ -15,14 +15,21 @@
 
 define('DIR','/ilikeyou');
 define('TITLE','i like you!');
-define('DIR_PICTURES','pic/');
 define('LANG','en');
-define('DOMAIN','localhost');
+define('DOMAIN',$_SERVER['HTTP_HOST']);
+define('PATH','/opt/lampp/htdocs');
 
-define('DB_LOCALHOST','localhost');
-define('DB_USER','root');
-define('DB_PASS','');
-define('DB_NAME','ilikeyou');
+if(DOMAIN == "localhost"){
+	define('DB_LOCALHOST','localhost');
+	define('DB_USER','root');
+	define('DB_PASS','');
+	define('DB_NAME','ilikeyou');
+}else{
+	define('DB_LOCALHOST','bm22.webservidor.net');
+	define('DB_USER','ilikeyou_ilikeu');
+	define('DB_PASS','123Mudar');
+	define('DB_NAME','ilikeyou_ilikeyou');
+}
 
 # autenticação com Twitter
 define('CONSUMER_KEY', '0EiIplmjQeOekmQmENyu7Q');

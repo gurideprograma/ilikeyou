@@ -25,9 +25,10 @@ define('MSG_LOGOUT','For return, click on button: ');
 define('MSG_WELCOME','Welcome');
 define('TXT_SIGNUP','');
 define('TXT_PRIVACY','<p>Is simple: we not get your info. We get just with login and twitter_id of your twitter, for you do can save your pictures in this site. Nothing more info! View we code in <a href="http://github.com/gurideprograma/ilikeyou" target="_blank">github.com/gurideprograma/ilikeyou</a> ;) We use GPL (licence).</p>');
-define('TXT_ME_1','<h3>Upload new picture</h3>');
+define('TXT_ME_1','Upload new picture');
 define('TXT_ME_2','<h3>My pictures</h3>');
 define('ERROR_NOUPLOADPICTURES','Nothing pictures here... ');
+define('ERROR_NOTLOGGED','You need do login.');
 
 # menu
 define('MENU_HOME','Home');
@@ -42,4 +43,5 @@ define('MENU_PRIVACY','Privacy');
 define('TITLE_SIGNUP','Sign Up!');
 define('TITLE_ME','My page');
 define('TITLE_PRIVACY','Privacy');
+define('TITLE_LOGIN','Login...');
 define('TITLE_LOGOUT','Bye :)');

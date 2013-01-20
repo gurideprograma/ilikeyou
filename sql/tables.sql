@@ -4,8 +4,6 @@
  * Copyright (C) 2012 @_gurideprograma
  */
 
-create database ilikeyou;
-
 create table pictures (
 	id int(11) auto_increment,
 	pkey varchar(128),

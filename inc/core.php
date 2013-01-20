@@ -35,7 +35,7 @@ class homePic {
 		 	aUI("bye! next!","loadPicture()","arrowthick-1-e"); 
 		 	e("</div>");
 		 	e("<div id=\"ratemsg\" style=\"display: none\"></div>");
-		 	e("<div id=\"pic\"><img src=\"".DIR_PICTURES."/".$r["pkey"]."/".$r["pic"]."\">");
+		 	e("<div id=\"pic\"><img src=\"".str_replace(PATH,"",$r["pic"])."\">");
 		 	info("
 		 	<span id=\"author\">".UPLOADEDBY.$core->user($r["usr"],"login")."</span>
 		 	<span id=\"date\"> in ".$this->since($r["since"])."</span>
@@ -99,7 +99,7 @@ class auth {
 	/**
 	 * @name con()
 	 * @author @_gurideprograma
-	 * @example $auth->con();
+	 * @example $auth->isOn();
 	 */
 	public function isOn(){
 		if(isset($_SESSION['status']) && $_SESSION['status']=='verified'){ return true; }else{ return false; }
@@ -112,7 +112,7 @@ class auth {
 	public function doSignup(){
     		$twitterid = $_SESSION['request_vars']['user_id'];
 		$screenname = $_SESSION['request_vars']['screen_name'];
-		$sel = mysql_query("SELECT SQL_CACHE twitterid,login FROM usr WHERE twitterid = '$twitterid' and login = '$screenname'") or die(mysql_error());
+		$sel = mysql_query("SELECT SQL_CACHE ukey,twitterid,login FROM usr WHERE twitterid = '$twitterid' and login = '$screenname'") or die(mysql_error());
 		if(total($sel) == 0){
 			$ukey = hash('sha512',date("YmdHis")."_$twitterid");
 			$ins = ins("usr","ukey, twitterid, login, since, status","'$ukey', '$twitterid', '$screenname', '".date("Y-m-d H:i:s")."', '1'");
@@ -129,7 +129,7 @@ class auth {
 	 * @return string
 	 */
 	public function twitterButton(){
-		e("<a href=\"?login\"><img src=\"img/bt/".LANG."/sign-twitter.png\" width=\"151\" height=\"24\" border=\"0\" /></a>");
+		e("<a href=\"?login\"><img src=\"img/bt/".LANG."/sign-twitter.png\" width=\"151\" height=\"24\" border=\"0\" id=\"twitterButton\" /></a>");
 	}
 }
 
@@ -181,9 +181,9 @@ class core {
 	public function menuLogin(){
 		$auth = new auth();
 		if($auth->isOn() == true){
-			e("<a href=\"".DIR."/?me\">".MENU_MYPAGE."</a>");
+			e("<li><a href=\"".DIR."/?me\">".MENU_MYPAGE."</a></li>");
 		}else{
-			e("<a href=\"".DIR."/?login\">".MENU_SIGNUP."</a> ");
+			e("<li><a href=\"".DIR."/?login\">".MENU_SIGNUP."</a></li>");
 		}
 	}
 	/**
@@ -196,7 +196,7 @@ class core {
 	public function menuLogout(){
 		$auth = new auth();
 		if($auth->isOn() == true){
-			e("<a href=\"".DIR."/?logout\">".MENU_LOGOUT."</a>");
+			e("<li><a href=\"".DIR."/?logout\">".MENU_LOGOUT."</a></li>");
 		}
 	}
 }
@@ -218,8 +218,24 @@ class user {
 		if(total($sel) == 0){
 			info(ERROR_NOUPLOADPICTURES);
 		}else{
-			//exibe a galeria de miniaturas
-			//dentro de cada miniatura, a informação das avaliações
+			include_once("inc/easyphpthumbnail.class.php");
+			$thumb = new easyphpthumbnail();
+			$thumb->Thumbsize = 200;
+			$thumb->Backgroundcolor = '#D0DEEE';
+			$thumb->Shadow = true;
+			while($r = fetch($sel)){
+				e("<div class=\"shade1\">
+					<div class=\"shade2\">
+						<div class=\"shade3\">
+						   	<div class=\"clipout\">
+						   		<div class=\"clipin\">
+		    							<img src=\"".$thumb->Createthumb(str_replace("/opt/lampp/htdocs","",$r["pic"]),"file")."\" class=\"thumb\">
+		    						</div>
+		    					</div>
+    						</div>
+    					</div>
+    				</div>");
+			}
 		}
 	}
 }

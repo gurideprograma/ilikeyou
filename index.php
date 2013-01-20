@@ -37,30 +37,77 @@ if($path == "pages/logout.php"){
 	session_start();
 }
 include_once("inc/twitteroauth.php");
-?><html>
-	<head>
-		<title><?= TITLE ?></title>
-		
-		<script type="text/javascript" src="<?= DIR ?>/inc/jquery-1.5.1.js"></script>
-		<script type="text/javascript" src="<?= DIR ?>/inc/jqueryui/js/jquery-ui-1.8.10.custom.min.js"></script>
-		<script type="text/javascript" src="<?= DIR ?>/inc/jqueryui.js"></script>
-		<script type="text/javascript" src="<?= DIR ?>/inc/js.js"></script>
-		
-		<link type="text/css" href="<?= DIR ?>/inc/jqueryui.css" rel="stylesheet" />
-		<link type="text/css" href="<?= DIR ?>/inc/css.css" rel="stylesheet" />
-		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ubuntu:regular,bold&subset=Latin">
-		<link type="text/css" href="<?= DIR ?>/inc/jqueryui/css/redmond/jquery-ui-1.8.10.custom.css" rel="stylesheet" />
-		
-		<meta http-equiv="content-language" content="en">
-		<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
-		<meta name="description" content="<?= DESCRIPTION ?>" />
-		<meta name="keywords" content="<?= KEYWORDS ?>">
-		<meta name="author" content="github.com/gurideprograma/ilikeyou" />
-		<meta name="reply-to" content="gurideprograma@mail.com">
-
-        </head>
-        <body onload="loadPicture()">
-        	<div id="title">i-<span>like</span>you<span id="ext"><?= EE ?>net</div></div>
+?><!DOCTYPE HTML>
+<!--
+/*
+ * jQuery File Upload Plugin Demo 6.13
+ * https://github.com/blueimp/jQuery-File-Upload
+ *
+ * Copyright 2010, Sebastian Tschan
+ * https://blueimp.net
+ *
+ * Licensed under the MIT license:
+ * http://www.opensource.org/licenses/MIT
+ */
+-->
+<html lang="en">
+<head>
+	<!-- Force latest IE rendering engine or ChromeFrame if installed -->
+	<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><![endif]-->
+	<meta charset="utf-8">
+	<title><?= TITLE ?></title>
+	
+	<script type="text/javascript" src="<?= DIR ?>/inc/jquery-1.5.1.js"></script>
+	<script type="text/javascript" src="<?= DIR ?>/inc/jqueryui/js/jquery-ui-1.8.10.custom.min.js"></script>
+	<script type="text/javascript" src="<?= DIR ?>/inc/jqueryui.js"></script>
+	<script type="text/javascript" src="<?= DIR ?>/inc/js.js"></script>
+	
+	<link type="text/css" href="<?= DIR ?>/inc/jqueryui.css" rel="stylesheet" />
+	<link type="text/css" href="<?= DIR ?>/inc/css.css" rel="stylesheet" />
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ubuntu:regular,bold&subset=Latin">
+	<link type="text/css" href="<?= DIR ?>/inc/jqueryui/css/redmond/jquery-ui-1.8.10.custom.css" rel="stylesheet" />
+	
+	<meta http-equiv="content-language" content="en">
+	<meta name="description" content="<?= DESCRIPTION ?>" />
+	<meta name="keywords" content="<?= KEYWORDS ?>">
+	<meta name="author" content="github.com/gurideprograma/ilikeyou" />
+	<meta name="reply-to" content="gurideprograma@mail.com">
+	<meta name="viewport" content="width=device-width">
+	<!-- Bootstrap CSS Toolkit styles -->
+	<link rel="stylesheet" href="inc/bootstrap.min.css">
+	<!-- Generic page styles -->
+	<link rel="stylesheet" href="scr/jfu/css/style.css">
+	<!-- Bootstrap styles for responsive website layout, supporting different screen sizes -->
+	<link rel="stylesheet" href="inc/bootstrap-responsive.min.css">
+	<!-- Bootstrap CSS fixes for IE6 -->
+	<!--[if lt IE 7]><link rel="stylesheet" href="inc/bootstrap-ie6.min.css"><![endif]-->
+	<!-- Bootstrap Image Gallery styles -->
+	<link rel="stylesheet" href="scr/jfu/inc/bootstrap-image-gallery.min.css">
+	<!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
+	<link rel="stylesheet" href="scr/jfu/css/jquery.fileupload-ui.css">
+	<!-- CSS adjustments for browsers with JavaScript disabled -->
+	<noscript><link rel="stylesheet" href="scr/jfu/css/jquery.fileupload-ui-noscript.css"></noscript>
+	<!-- Shim to make HTML5 elements usable in older Internet Explorer versions -->
+	<!--[if lt IE 9]><script src="inc/html5.js"></script><![endif]-->
+</head>
+<body onload="loadPicture()">
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <div class="nav-collapse">
+                <ul class="nav">
+                    <li class="active"><a class="brand" href="<?= DIR ?>/" id="title">i-<span>like</span>you<span id="ext"><?= EE ?>net</a></li>
+                    <li><a href="<?= DIR ?>/"><?= MENU_HOME ?></a></li>
+                    <? $core->menuLogin(); ?>
+                    <li><a href="<?= DIR ?>/?privacy"><?= MENU_PRIVACY ?></a></li>
+                    <? $core->menuLogout(); ?><br>
+                </ul>
+            </div>
         	<div id="welcome">
         		<?
         		if($auth->isOn() == true){
@@ -70,17 +117,14 @@ include_once("inc/twitteroauth.php");
         		}
         		?>
         	</div>
-        	<div style="clear:both"></div>
-        	<? if($path == "pages/home.php"){ ?><div id="cont"></div><? } ?>
-        	<div id="conteudo"><? include($path) ?></div>
+        </div>
+    </div>
+</div>
         	
-        	<div id="copy">
-        		<a href="<?= DIR ?>/"><?= MENU_HOME ?></a>
-        		<? $core->menuLogin(); ?>
-        		<a href="<?= DIR ?>/?privacy"><?= MENU_PRIVACY ?></a>
-        		<? /*<a href="<?= DIR ?>/?use"><?= MENU_TERMSUSE ?></a> */ ?>
-        		<? $core->menuLogout(); ?><br>
-        		&copy; <?= date("Y") ?> - <?= TITLE ?>
-        	</div>
+
+        	<div style="clear:both"></div>
+        	<? if($path == "pages/home.php"){ ?><div id="cont"></div>
+        	<div style="clear:both"></div><? } ?>
+        	<div id="conteudo"><? include($path) ?></div>
         </body>
 </html>
