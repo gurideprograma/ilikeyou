@@ -155,7 +155,8 @@ class UploadHandler
 
     protected function get_user_id() {
         @session_start();
-        return session_id();
+        #return session_id();
+        return $_SESSION["ukey"];
     }
 
     protected function get_user_path() {
