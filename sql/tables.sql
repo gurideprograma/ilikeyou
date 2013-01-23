@@ -8,7 +8,7 @@ create table pictures (
 	id int(11) auto_increment,
 	pkey varchar(128),
 	pic text,
-	usr int(11),
+	usr varchar(128),
 	since datetime,
 	status int(1),
 	yes int(11),
@@ -33,16 +33,16 @@ create table usr (
 
 create table vote_usr (
 	id int(11) auto_increment,
-	pic int(11),
-	usr int(11),
+	pic varchar(128),
+	usr varchar(128),
 	datehour datetime,
 	primary key(id)
 );
 
 create table vote_an (
 	id int(11) auto_increment,
-	pic int(11),
-	ip int(11),
+	pic varchar(128),
+	ip varchar(15),
 	datehour datetime,
 	primary key(id)
 );
@@ -64,4 +64,12 @@ create table sessoes (
 	data datetime,
 	status int(1),
 	primary key(id)
+);
+
+create table views (
+	id int(11) auto_increment,
+        pic varchar(128),
+        usr varchar(128),
+        datehour datetime,
+        primary key(id)
 );

@@ -17,8 +17,7 @@
 define('ERROR404','Oops! Not found this page... sorry...');
 define('LOADING','Loading...');
 define('UPLOADEDBY','Uploaded by ');
-define('RATE_SUCESS_LOGOUT','Rated! ;) You can signup');
-define('RATE_SUCESS_NORMAL','Rated! ;)');
+define('RATE_SUCESS_LOGOUT','Rated! ;) You can signup <a href=\"?login\">here</a> and save your votes!');
 define('RATE_SUCESS_LOGIN','Rated! ;) <a href="'.DIR.'/?me">View my reviews</a> | <a href="#" onclick="loadPicture()">Next picture</a> &raquo;');
 define('MSG_ISON','You are logged now! Loading your page...');
 define('MSG_LOGOUT','For return, click on button: ');
@@ -29,6 +28,8 @@ define('TXT_ME_1','Upload new picture');
 define('TXT_ME_2','<h3>My pictures</h3>');
 define('ERROR_NOUPLOADPICTURES','Nothing pictures here... ');
 define('ERROR_NOTLOGGED','You need do login.');
+define('RATE_ERROR_1','Oops! You have already voted on this picture!');
+define('RATE_ERROR_2','Oops! Your IP Address has already voted on this picture!');
 
 # menu
 define('MENU_HOME','Home');

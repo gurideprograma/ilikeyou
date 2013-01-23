@@ -24,15 +24,18 @@ class homePic {
 	 * @author @_gurideprograma
 	 * @example $homePic->showPicture();
 	 */
-	 public function showPicture(){
+	 public function showPicture($prev=false){
 	 	$core = new core();
+	 	if($prev == true){
+	 		$this->insView($prev);
+	 	}
 	 	$sel = sel("pictures","status > 0","RAND()",1);
 	 	$r = fetch($sel);
 	 	if($this->noRepeatPicture($r["pkey"]) == true){
 		 	e("<div id=\"rate\">");
 		 	aUI("i like you!","ilikeyou('".$r["pkey"]."','".LOADING."')","heart");
 		 	e(" ");
-		 	aUI("bye! next!","loadPicture()","arrowthick-1-e"); 
+		 	aUI("bye! next!","loadPicture('".$r["pkey"]."')","arrowthick-1-e"); 
 		 	e("</div>");
 		 	e("<div id=\"ratemsg\" style=\"display: none\"></div>");
 		 	e("<div id=\"pic\"><img src=\"".str_replace(PATH,"",$r["pic"])."\">");
@@ -47,8 +50,25 @@ class homePic {
 		 }
 	 }
 	 
+	 /**
+	  * Faz uma verificação, se o usuário estiver online, para não exibir uma mesma imagem que já foi visualizada, mais de uma vez
+	  * @name noRepeatPicture
+	  * @author @_gurideprograma
+	  * @param string $pkey
+	  * @exeample $homePic->noRepeat
+	  */
 	 public function noRepeatPicture($pkey){
-	 	return true;
+	 	$auth = new auth();
+	 	if($auth->isOn() == true){
+		 	$sel = mysql_query("SELECT SQL_CACHE pic,usr FROM views WHERE pic = '$pkey' and usr = '".$_SESSION["ukey"]."'") or die(mysql_error());
+		 	if(total($sel) > 0){
+		 		return false;
+		 	}else{
+		 		return true;
+		 	}
+		 }else{
+		 	return true;
+		 }
 	 }
 	/**
 	 * @name since()
@@ -61,6 +81,17 @@ class homePic {
 	 	$date = explode(" ",$date);
 	 	return $date[0];
 	 }
+	 
+	 /**
+	  * Insere uma visualização de imagem na tabela
+	  * @name insView()
+	  * @author @_gurideprograma
+	  * @param string $pkey
+	  * @example $homePic->insView($pkey);
+	  */
+	 public function insView($pkey){
+	 	$insview = ins("views","pic,usr,datehour","'$pkey', '".$_SESSION["ukey"]."', '".date("Y-m-d H:i:s")."'");
+	 }
 }
 
 /**
@@ -70,6 +101,7 @@ class homePic {
  */
 class rate {
 	/**
+	 * Registra as avaliações
 	 * @name rating()
 	 * @author @_gurideprograma
 	 * @param string $pkey
@@ -77,7 +109,30 @@ class rate {
 	 * @return bool
 	 */
 	public function rating($pkey){
-		info(RATE_SUCESS_LOGIN);
+		//verifica se está logado
+		if($this-isOn() == true){ //se estiver, verifica se já votou nesta imagem
+			$sel = mysql_query("SELECT SQL_CACHE pic,usr FROM vote_usr WHERE pic = '$pkey' and usr = '".$_SESSION["ukey"]."'") or die(mysql_error());
+			if(total($sel) > 0){ //se votou, mostra erro
+				error(RATE_ERROR_1);
+			}else{ //se não votou, vota e mostra msg de sucesso
+				$ins = ins("vote_usr","pic, usr, datehour","'$pkey', '".$_SESSION["ukey"]."', '".date("Y-m-d H:i:s")."'");
+				$upd = mysql_query("UPDATE pictures SET yes=yes+1, total=total+1 WHERE pic = '$pkey'") or die(mysql_error());
+				$hp = new homePic();
+				$hp->insView($pkey);
+				info(RATE_SUCESS_LOGIN);
+			}
+		}else{ //se não tiver logado, verifica se o ip já votou
+			$sel = mysql_query("SELECT SQL_CACHE pic,ip FROM vote_an WHERE pic = '$pkey' and ip = '".$_SERVER["REMOTE_ADDR"]."'") or die(mysql_error());
+			if(total($sel) > 0){ //se votou, mostra erro
+				error(RATE_ERROR_2);
+			}else{ //se não votou, deixa votar e mostra msg de sucesso
+				$ins = ins("vote_an","pic, ip, datehour","'$pkey', '".$_SESSION["REMOTE_ADDR"]."', '".date("Y-m-d H:i:s")."'");
+				$upd = mysql_query("UPDATE pictures SET yes_an=yes_an+1, total=total+1 WHERE pic = '$pkey'") or die(mysql_error());
+				$hp = new homePic();
+				$hp->insView($pkey);
+				info(RATE_SUCESS_LOGOUT);
+			}
+		}
 	}
 }
 
@@ -207,7 +262,7 @@ class core {
  */
 class user {
 	/**
-	 * Exibe e lista imagens enviadas pelo usuário
+	 * Exibe e lista imagens enviadas pelo usuário || desenvolvimento pausado. Este ítem seria usado na página /?me mas no momento está sendo usado o script de thumbs do próprio script de upload. Esta função poderia ser usada também uma página /?gallery
 	 * @name myPictures()
 	 * @author @_gurideprograma
 	 * @example $user->myPictures();

@@ -5,7 +5,7 @@ function ilikeyou(pkey,loading){
 	$('#ratemsg').load("rate.php", {pkey: pkey});
 }
 
-function loadPicture(){
+function loadPicture(pkey){
 	$('#cont').html('<?= LOADING ?>');
-	$('#cont').load('pic.php');
+	$('#cont').load('pic.php',{n: pkey});
 }
