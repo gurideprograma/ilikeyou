@@ -533,10 +533,10 @@ class UploadHandler
                         fopen($uploaded_file, 'r'),
                         FILE_APPEND
                     );
-                    @mysql_query("INSERT INTO pictures (pkey, pic, usr, since, status, yes, no, total, yes_an, no_an) VALUES ('".hash('sha512',date("YmdHis").$_SESSION["ukey"])."', '$file_path', '".$_SESSION["ukey"]."', '".date("Y-m-d H:i:s")."', '1', '0', '0', '0', '0', '0')");
+                    @mysql_query("INSERT INTO pictures (pkey, pic, usr, since, status, yes, no, total, yes_an, no_an) VALUES ('".hash('sha512',date("YmdHis").$_SESSION["ukey"].$file_path)."', '$file_path', '".$_SESSION["ukey"]."', '".date("Y-m-d H:i:s")."', '1', '0', '0', '0', '0', '0')");
                 } else {
                     move_uploaded_file($uploaded_file, $file_path);
-	            @mysql_query("INSERT INTO pictures (pkey, pic, usr, since, status, yes, no, total, yes_an, no_an) VALUES ('".hash('sha512',date("YmdHis").$_SESSION["ukey"])."', '$file_path', '".$_SESSION["ukey"]."', '".date("Y-m-d H:i:s")."', '1', '0', '0', '0', '0', '0')");
+	            @mysql_query("INSERT INTO pictures (pkey, pic, usr, since, status, yes, no, total, yes_an, no_an) VALUES ('".hash('sha512',date("YmdHis").$_SESSION["ukey"].$file_path)."', '$file_path', '".$_SESSION["ukey"]."', '".date("Y-m-d H:i:s")."', '1', '0', '0', '0', '0', '0')");
                 }
             } else {
                 // Non-multipart uploads (PUT method support)
@@ -545,7 +545,7 @@ class UploadHandler
                     fopen('php://input', 'r'),
                     $append_file ? FILE_APPEND : 0
                 );
-                @mysql_query("INSERT INTO pictures (pkey, pic, usr, since, status, yes, no, total, yes_an, no_an) VALUES ('".hash('sha512',date("YmdHis").$_SESSION["ukey"])."', '$file_path', '".$_SESSION["ukey"]."', '".date("Y-m-d H:i:s")."', '1', '0', '0', '0', '0', '0')");
+                @mysql_query("INSERT INTO pictures (pkey, pic, usr, since, status, yes, no, total, yes_an, no_an) VALUES ('".hash('sha512',date("YmdHis").$_SESSION["ukey"].$file_path)."', '$file_path', '".$_SESSION["ukey"]."', '".date("Y-m-d H:i:s")."', '1', '0', '0', '0', '0', '0')");
             }
             $file_size = $this->get_file_size($file_path, $append_file);
             if ($file_size === $file->size) {
