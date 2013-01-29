@@ -23,7 +23,7 @@ define('MSG_ISON','You are logged now! Loading your page...');
 define('MSG_LOGOUT','For return, click on button: ');
 define('MSG_WELCOME','Welcome');
 define('TXT_SIGNUP','');
-define('TXT_PRIVACY','<p>Is simple: we not get your info. We get just with login and twitter_id of your twitter, for you do can save your pictures in this site. Nothing more info! View we code in <a href="http://github.com/gurideprograma/ilikeyou" target="_blank">github.com/gurideprograma/ilikeyou</a> ;) We use GPL (licence).</p>');
+define('TXT_PRIVACY','<p>In portuguese (Brazil):</p><p><i>Ao logar no sistema o usu&aacute;rio concorda em informar seu nome de usu&aacute;rio e identificador do servi&ccedil;o Twitter. Armazenamos estas informa&ccedil;&otilde;es em nosso banco de dados a fim de possibilitar que voc&ecirc; possa acessar as imagens que voc&ecirc; enviou, atrav&eacute;s de uma p&aacute;gina espec&iacute;fica para isto. N&atilde; armazenamos nenhuma outra informa&ccedil;&atilde;o. O c&oacute;digo-fonte de nosso sistema est&aacute; dispon&iacute;vel ao p&uacute;blico sob licen&ccedil;a GPL no endere&ccedil;o <a href="http://github.com/gurideprograma/ilikeyou" target="_blank">www.github.com/gurideprograma/ilikeyou</a>, para quem quiser averiguar nossas afirmativas quanto a privacidade, para quem quiser estudar o c&oacute;digo, modifica-lo para uso em outros sites ou distribui-lo, sem custo algum.</i></p>');
 define('TXT_ME_1','Upload new picture');
 define('TXT_ME_2','<h3>My pictures</h3>');
 define('ERROR_NOUPLOADPICTURES','Nothing pictures here... ');

@@ -109,8 +109,9 @@ class rate {
 	 * @return bool
 	 */
 	public function rating($pkey){
+		$auth = new auth();
 		//verifica se está logado
-		if($this-isOn() == true){ //se estiver, verifica se já votou nesta imagem
+		if($auth->isOn() == true){ //se estiver, verifica se já votou nesta imagem
 			$sel = mysql_query("SELECT SQL_CACHE pic,usr FROM vote_usr WHERE pic = '$pkey' and usr = '".$_SESSION["ukey"]."'") or die(mysql_error());
 			if(total($sel) > 0){ //se votou, mostra erro
 				error(RATE_ERROR_1);
