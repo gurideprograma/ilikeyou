@@ -95,49 +95,6 @@ class homePic {
 }
 
 /**
- * Trata as avaliações
- * @name rate
- * @author @_gurideprograma
- */
-class rate {
-	/**
-	 * Registra as avaliações
-	 * @name rating()
-	 * @author @_gurideprograma
-	 * @param string $pkey
-	 * @example $rate->rating($pkey);
-	 * @return bool
-	 */
-	public function rating($pkey){
-		$auth = new auth();
-		//verifica se está logado
-		if($auth->isOn() == true){ //se estiver, verifica se já votou nesta imagem
-			$sel = mysql_query("SELECT SQL_CACHE pic,usr FROM vote_usr WHERE pic = '$pkey' and usr = '".$_SESSION["ukey"]."'") or die(mysql_error());
-			if(total($sel) > 0){ //se votou, mostra erro
-				error(RATE_ERROR_1);
-			}else{ //se não votou, vota e mostra msg de sucesso
-				$ins = ins("vote_usr","pic, usr, datehour","'$pkey', '".$_SESSION["ukey"]."', '".date("Y-m-d H:i:s")."'");
-				$upd = mysql_query("UPDATE pictures SET yes=yes+1, total=total+1 WHERE pic = '$pkey'") or die(mysql_error());
-				$hp = new homePic();
-				$hp->insView($pkey);
-				info(RATE_SUCESS_LOGIN);
-			}
-		}else{ //se não tiver logado, verifica se o ip já votou
-			$sel = mysql_query("SELECT SQL_CACHE pic,ip FROM vote_an WHERE pic = '$pkey' and ip = '".$_SERVER["REMOTE_ADDR"]."'") or die(mysql_error());
-			if(total($sel) > 0){ //se votou, mostra erro
-				error(RATE_ERROR_2);
-			}else{ //se não votou, deixa votar e mostra msg de sucesso
-				$ins = ins("vote_an","pic, ip, datehour","'$pkey', '".$_SESSION["REMOTE_ADDR"]."', '".date("Y-m-d H:i:s")."'");
-				$upd = mysql_query("UPDATE pictures SET yes_an=yes_an+1, total=total+1 WHERE pic = '$pkey'") or die(mysql_error());
-				$hp = new homePic();
-				$hp->insView($pkey);
-				info(RATE_SUCESS_LOGOUT);
-			}
-		}
-	}
-}
-
-/**
  * Trata a autenticação
  * @name auth
  * @author @_gurideprograma
@@ -186,6 +143,49 @@ class auth {
 	 */
 	public function twitterButton(){
 		e("<a href=\"?login\"><img src=\"img/bt/".LANG."/sign-twitter.png\" width=\"151\" height=\"24\" border=\"0\" id=\"twitterButton\" /></a>");
+	}
+}
+
+/**
+ * Trata as avaliações
+ * @name rate
+ * @author @_gurideprograma
+ */
+class rate {
+	/**
+	 * Registra as avaliações
+	 * @name rating()
+	 * @author @_gurideprograma
+	 * @param string $pkey
+	 * @example $rate->rating($pkey);
+	 * @return bool
+	 */
+	public function rating($pkey){
+		$auth = new auth();
+		//verifica se está logado
+		if($auth->isOn() == true){ //se estiver, verifica se já votou nesta imagem
+			$sel = mysql_query("SELECT SQL_CACHE pic,usr FROM vote_usr WHERE pic = '$pkey' and usr = '".$_SESSION["ukey"]."'") or die(mysql_error());
+			if(total($sel) > 0){ //se votou, mostra erro
+				error(RATE_ERROR_1);
+			}else{ //se não votou, vota e mostra msg de sucesso
+				$ins = ins("vote_usr","pic, usr, datehour","'$pkey', '".$_SESSION["ukey"]."', '".date("Y-m-d H:i:s")."'");
+				$upd = mysql_query("UPDATE pictures SET yes=yes+1, total=total+1 WHERE pic = '$pkey'") or die(mysql_error());
+				$hp = new homePic();
+				$hp->insView($pkey);
+				info(RATE_SUCESS_LOGIN);
+			}
+		}else{ //se não tiver logado, verifica se o ip já votou
+			$sel = mysql_query("SELECT SQL_CACHE pic,ip FROM vote_an WHERE pic = '$pkey' and ip = '".$_SERVER["REMOTE_ADDR"]."'") or die(mysql_error());
+			if(total($sel) > 0){ //se votou, mostra erro
+				error(RATE_ERROR_2);
+			}else{ //se não votou, deixa votar e mostra msg de sucesso
+				$ins = ins("vote_an","pic, ip, datehour","'$pkey', '".$_SESSION["REMOTE_ADDR"]."', '".date("Y-m-d H:i:s")."'");
+				$upd = mysql_query("UPDATE pictures SET yes_an=yes_an+1, total=total+1 WHERE pic = '$pkey'") or die(mysql_error());
+				$hp = new homePic();
+				$hp->insView($pkey);
+				info(RATE_SUCESS_LOGOUT);
+			}
+		}
 	}
 }
 
